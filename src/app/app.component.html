@@ -1,6 +1,6 @@
 <nav>
-  <a routerLink="/cappuccino" routerLinkActive="active">Cappuccino</a>
-  <a routerLink="/legos" routerLinkActive="active">Legos</a>
+  <a routerLink="/cappuccino" routerLinkActive="active" (click)="updateProduct('cappuccino')">Cappuccino</a>
+  <a routerLink="/legos" routerLinkActive="active" (click)="updateProduct('legos')">Legos</a>
 </nav>
 
 <router-outlet></router-outlet>

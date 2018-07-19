@@ -6,7 +6,7 @@ const routes: Routes = [
   { path: 'cappuccino', loadChildren: './casino/casino.module#CasinoModule' },
   { path: 'legos', loadChildren: './vegas/vegas.module#VegasModule'  },
   { path: '',
-    redirectTo: '/casino',
+    redirectTo: '/cappuccino',
     pathMatch: 'full'
   },
   { path: '**', component: PageNotFoundComponent }

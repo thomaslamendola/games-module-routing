@@ -18,7 +18,3 @@ a.active {
     text-decoration-line: underline;
 
 }
-
-routerOutlet {
-    margin-top: 3em;
-}
