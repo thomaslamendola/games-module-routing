@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from './core/data.service';
+import { DataService, State } from './core/data.service';
 import { Subscription } from '../../node_modules/rxjs';
 
 @Component({
@@ -10,22 +10,23 @@ import { Subscription } from '../../node_modules/rxjs';
 export class AppComponent implements OnInit {
   title = 'app';
 
-  public product$: Subscription;
-  public product: any;
-  
+  public state$: Subscription;
+  public state: State;
+
   constructor(private dataService: DataService) { 
-    this.product$ = this.dataService.product$.subscribe(
-      product$ => {
-        this.product = product$
+    this.state$ = this.dataService.state$.subscribe(
+      state$ => {
+        this.state = state$
       }
     )
   }
 
-  updateProduct(newProduct: string) {
-    this.dataService.changeProduct(newProduct);
+  updateProduct(newValue: string) {
+    this.state.product = newValue;
+    this.dataService.updateState(this.state);
   }
 
   ngOnInit() {
-    
+
   }
 }

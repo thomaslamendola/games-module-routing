@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../../core/data.service';
+import { DataService, State } from '../../core/data.service';
 import { Subscription } from '../../../../node_modules/rxjs';
 
 @Component({
@@ -9,19 +9,31 @@ import { Subscription } from '../../../../node_modules/rxjs';
 })
 export class NavbarComponent implements OnInit {
 
-  public product$: Subscription;
-  public product: any;
-  
+  public state$: Subscription;
+  public state: State;
+
+  public items: Array<IGamesCategoryItem> = new Array<IGamesCategoryItem>();
+
   constructor(private dataService: DataService) { 
-    this.product$ = this.dataService.product$.subscribe(
-      product$ => {
-        this.product = product$
+    this.state$ = this.dataService.state$.subscribe(
+      state$ => {
+        this.state = state$
       }
-    )
+    );
+    this.items.push({key: 'foryou', label: 'For You'});
+    this.items.push({key: 'sloths', label: 'Sloths'});
+  }
+
+  updateCategory(newValue: string) {
+    this.state.gamesCategory = newValue;
+    this.dataService.updateState(this.state);
   }
 
   ngOnInit() {
   }
+}
 
-  
+export interface IGamesCategoryItem {
+  key: string;
+  label: string;
 }

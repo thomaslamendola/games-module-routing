@@ -5,21 +5,28 @@ import { BehaviorSubject } from '../../../node_modules/rxjs';
   providedIn: 'root'
 })
 export class DataService { //or AppStateService?
-  private _product$: BehaviorSubject<string>; 
-  public _product: string;
+
+  private _state$: BehaviorSubject<State>;
+  public _state: State;
 
   constructor() { 
-    this._product$ = new BehaviorSubject("cappuccino");
+    this._state$ = new BehaviorSubject(new State());
   }
 
-  get product$() {
-    return this._product$.asObservable();
+  get state$() {
+    return this._state$.asObservable();
   }
 
-  changeProduct(newProduct: string) {
-    this._product$.next(newProduct);
-    console.log("someone updated the product");
+  updateState(newValue: State) {
+    this._state$.next(JSON.parse(JSON.stringify(newValue)));
   }
 }
 
-
+export class State {
+  product: string;
+  gamesCategory: string;
+  constructor() {
+    this.product = 'cappuccino';
+    this.gamesCategory = 'foryou';
+  }
+}

@@ -1,4 +1,3 @@
 <nav>
-  <a [routerLink]="['/', product, 'foryou']" routerLinkActive="active">For You</a>
-  <a [routerLink]="['/', product, 'slots']" routerLinkActive="active">Slots</a>
+  <a href="javascript:;" *ngFor='let item of items' [ngClass]="{'active': state.gamesCategory === item.key}" (click)="updateCategory(item.key)">{{item.label}}</a>
 </nav>
